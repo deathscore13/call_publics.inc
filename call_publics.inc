@@ -66,7 +66,7 @@ methodmap CallPublics __nullable__
      * @param key           Ключ к имени/идентификатору функции из объекта GameData
      * 
      * @return              true если добавлено, false если нет
-     * @error               Ключ или финкция не найдена
+     * @error               Ключ или функция не найдена
      */
     public bool AddFunction(PrivateForward fwd, const char[] key)
     {

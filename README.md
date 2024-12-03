@@ -51,35 +51,35 @@ int func(const char[] text)
 #include <call_publics>
 
 // глобальная переменная для возможности вызова функции из любой части кода
-PrivateForward hFwd;
+PrivateForward hTestFunc;
+
+// глобальная переменная для записи возвращаемого значения функции
+int iTestFuncReturn;
 
 // макрос для удобства вызова функции
-#define FUNC(%0,%1) \
-    Call_StartForward(hFwd); \
-    Call_PushString(%1); \
-    Call_Finish(%0)
+#define TEST_FUNC(%0) \
+    Call_StartForward(hTestFunc); \
+    Call_PushString(%0); \
+    Call_Finish(iTestFuncReturn)
 
-public void OnPluginStart()
+public void OnAllPluginsLoaded()
 {
     // создание прототипа функции
-    hFwd = new PrivateForward(ET_Single, Param_String);
+    hTestFunc = new PrivateForward(ET_Single, Param_String);
 
     // создание объекта CallPublics с данными из Path_SM/gamedata/test.txt
     CallPublics hndl = new CallPublics(new GameData("test"));
 
     // добавление функции из CallPublics в hFwd
-    hndl.AddFunction(hFwd, "func");
+    hndl.AddFunction(hTestFunc, "func");
 
     // больше нигде не используется, удаляем (не используйте CloseHandle()!)
     hndl.Close();
 
-    // создание переменной под ответ
-    int ret;
-
     // вызов функции
-    FUNC(ret, "main");
+    TEST_FUNC("main");
 
     // вывод ответа
-    PrintToServer("ret = %d", ret);
+    PrintToServer("iTestFuncReturn = %d", iTestFuncReturn);
 }
 ```

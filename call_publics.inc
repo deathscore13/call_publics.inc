@@ -74,7 +74,7 @@ methodmap CallPublics __nullable__
 
         char buffer[256];
         if (!view_as<GameData>(view_as<DataPack>(this).ReadCell()).GetKeyValue(key, buffer, sizeof(buffer)))
-            ThrowError("CallPublics::GetFunction: key '%s' not found", key);
+            ThrowError("CallPublics::AddFunction: key '%s' not found", key);
         
         if (buffer[0] == '@')
         {
@@ -82,7 +82,7 @@ methodmap CallPublics __nullable__
             Function func = GetFunctionByName(plugin, buffer[1]);
             
             if (func == INVALID_FUNCTION)
-                ThrowError("CallPublics::GetFunction: function '%s' not found", buffer[1]);
+                ThrowError("CallPublics::AddFunction: function '%s' not found", buffer[1]);
 
             return fwd.AddFunction(plugin, func);
         }

@@ -70,7 +70,7 @@ public void OnAllPluginsLoaded()
     // создание объекта CallPublics с данными из Path_SM/gamedata/test.txt
     CallPublics hndl = new CallPublics(new GameData("test"));
 
-    // добавление функции из CallPublics в hFwd
+    // добавление функции из CallPublics в hTestFunc
     hndl.AddFunction(hTestFunc, "func");
 
     // больше нигде не используется, удаляем (не используйте CloseHandle()!)
